@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <main className='text-2xl bg-red-600'>
+    <main className='text-2x'>
       Airbnb clone!
     </main>
   )
