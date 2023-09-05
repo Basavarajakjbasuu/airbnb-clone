@@ -33,7 +33,7 @@ const Search = () => {
             px-6
           "
         >
-          Any where
+          Anywhere
         </div>
 
         <div
@@ -63,7 +63,7 @@ const Search = () => {
             gap-3
           "
         >
-          <div className="hidden sm:block">Add Guests</div>
+          <div className="hidden sm:block">Add guests</div>
 
           <div
             className="

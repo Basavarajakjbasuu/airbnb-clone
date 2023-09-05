@@ -8,7 +8,7 @@ const nunito = Nunito({
 })
 
 export const metadata: Metadata = {
-  title: 'Airbnb',
+  title: 'Holiday Homes & Apartment Rentals - Airbnb',
   description: 'Airbnb clone',
 }
 
