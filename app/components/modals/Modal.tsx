@@ -16,7 +16,7 @@ interface ModalProps {
 }
 
 import { IoMdClose } from 'react-icons/io';
-import Button from "./Button";
+import Button from "../Button";
 
 const Modal: React.FC<ModalProps> = ({
   isOpen,

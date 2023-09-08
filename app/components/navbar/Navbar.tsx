@@ -1,9 +1,18 @@
+
 import Container from "../Container"
 import Logo from "./Logo"
 import Search from "./Search"
-import UserMenu from "./UserMenu"
+import UserMenu from "./UserMenu";
 
-export const Navbar = () => {
+import { safeUser } from '@/app/types';
+
+interface NavbarProps {
+  currentUser?: safeUser | null; 
+}
+
+export const Navbar: React.FC<NavbarProps> = ({
+  currentUser
+}) => {
   return (
     <header className="fixed w-full bg-white z-10 shadow-sm">
       <div
@@ -25,7 +34,7 @@ export const Navbar = () => {
           >
             <Logo />
             <Search />
-            <UserMenu />
+            <UserMenu currentUser={currentUser} />
           </div>
         </Container>
       </div>
