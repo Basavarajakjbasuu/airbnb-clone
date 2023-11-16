@@ -27,6 +27,7 @@ import Button from "../Button";
 const LoginModal = () => {
 
   const router = useRouter();
+
   const registerModal = useRegisterModel();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
@@ -66,6 +67,11 @@ const LoginModal = () => {
     })
   }
 
+  const toggle = useCallback(() => {
+    loginModal.onClose()
+    registerModal.onOpen();
+  }, [loginModal, registerModal])
+  
   // bodyContent
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -121,7 +127,16 @@ const LoginModal = () => {
         "
       >
         <p>
-          Already have an account? <span>Login</span> 
+          First time using Airbnb? {' '}
+          <button
+            onClick={toggle}
+            className="
+              text-neutral-800
+              cursor-pointer
+              hover:underline
+              font-semibold
+            "
+          >Create an account</button> 
         </p>
 
       </div>

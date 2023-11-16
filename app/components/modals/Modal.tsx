@@ -1,5 +1,3 @@
-'use client'
-
 import { useCallback, useEffect, useState } from "react";
 
 interface ModalProps {
@@ -12,7 +10,7 @@ interface ModalProps {
   actionLabel: string;
   disabled?: boolean;
   secondaryAction?: () => void;
-  secondaryActionLabel?: string
+  secondaryActionLabel?: string;
 }
 
 import { IoMdClose } from 'react-icons/io';
@@ -28,24 +26,21 @@ const Modal: React.FC<ModalProps> = ({
   actionLabel,
   secondaryAction,
   secondaryActionLabel,
-  disabled
+  disabled,
 }) => {
-
   const [showModal, setShowModal] = useState(isOpen);
 
   useEffect(() => {
-
     setShowModal(isOpen);
-  }, [isOpen]); 
-  
+  }, [isOpen]);
+
   const handleClose = useCallback(() => {
     if (disabled) return;
-    
+
     setShowModal(false);
     setTimeout(() => {
       onClose();
-    }, 300)
-
+    }, 300);
   }, [disabled, onClose]);
 
   const handleSubmit = useCallback(() => {
@@ -60,23 +55,19 @@ const Modal: React.FC<ModalProps> = ({
     }
 
     secondaryAction();
-
-  }, [disabled, secondaryAction])
-
+  }, [disabled, secondaryAction]);
 
   if (!isOpen) {
     return null;
   }
+
   return (
     <main>
-
       <div
         className="
           flex
           justify-center
           items-center
-          overflow-y-hidden
-          overflow-x-hidden
           fixed
           inset-0
           z-50
@@ -87,18 +78,7 @@ const Modal: React.FC<ModalProps> = ({
       >
         <div
           className="
-            relative
-            w-full
-            md:w-4/6
-            lg:w-3/6
-            xl:w-2/5
-            my-6
-            mx-auto
-            rounded-lg
-            h-full
-
-            lg:max-h-[600px]
-            md:max-h-[500px]
+          relative w-full max-w-[30rem] h-auto overflow-y-scroll scrollbar-hide
           "
         >
           {/* CONTENT */}
@@ -106,29 +86,26 @@ const Modal: React.FC<ModalProps> = ({
             className={`
               translate
               duration-300
-              h-full
-              ${showModal ? 'translate-y-0': 'translate-y-full'}
-              ${showModal ? 'opacity-100': 'opacity-0'}
+              ${showModal ? 'translate-y-0' : 'translate-y-full'}
+              ${showModal ? 'opacity-100' : 'opacity-0'}
             `}
           >
             <div
               className="
                 translate
-                h-full
                 border-0
                 rounded-lg
                 shadow-lg
-                relative
                 flex
                 flex-col
                 w-full
                 bg-white
                 outline-none
                 focus:outline-none
+                sticky
               "
             >
               {/* Header */}
-
               <div
                 className="
                   flex
@@ -166,52 +143,48 @@ const Modal: React.FC<ModalProps> = ({
               {/* Body */}
               <div
                 className="
-                  md:h-auto
                   md:overflow-y-auto
                   md:scrollbar-hide
-                "  
+                  sm:h-[80vh] md:h-[70vh] lg:h-[60vh]
+                "
               >
+                <div className="px-6 pt-4 flex-auto">{body}</div>
+              </div>
 
-                <div className="relative px-6 pt-4 flex-auto">
-                  {body}
-                </div>
-
-                {/* Footer */}
-                <div className="flex flex-col gap-2 p-6">
-                  <div
-                    className="
-                      flex
-                      flex-row
-                      items-center
-                      gap-4
-                      w-full
-                    "
-                  >
+              {/* Footer */}
+              <div className="flex flex-col gap-2 p-6">
+                <div
+                  className="
+                    flex
+                    flex-row
+                    items-center
+                    gap-4
+                    w-full
+                  "
+                >
+                  {secondaryAction && secondaryActionLabel && (
                     <Button
-                      disabled={disabled}
-                      label={actionLabel}
-                      onClick={handleSubmit}
-                    />
-                    {secondaryAction && secondaryActionLabel && (
-                      <Button
                       outline
                       disabled={disabled}
                       label={secondaryActionLabel}
                       onClick={handleSecondaryAction}
-                      />
-                      )}
-                  </div>
-                  {footer}
+                    />
+                  )}
+
+                  <Button
+                    disabled={disabled}
+                    label={actionLabel}
+                    onClick={handleSubmit}
+                  />
                 </div>
+                {footer}
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </main>
-    
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;
