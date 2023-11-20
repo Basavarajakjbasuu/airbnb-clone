@@ -1,4 +1,5 @@
 
+import Link from "next/link";
 import Container from "../Container"
 import Categories from "./Categories";
 import Logo from "./Logo"
@@ -33,7 +34,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               md:gap-0
             "
           >
-            <Logo />
+            <Link href={'/'}>
+              <Logo />
+            </Link>
             <Search />
             <UserMenu currentUser={currentUser} />
           </div>

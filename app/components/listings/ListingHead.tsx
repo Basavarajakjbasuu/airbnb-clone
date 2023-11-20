@@ -1,0 +1,61 @@
+'use client';
+import Image from "next/image";
+
+import useCountries from "@/app/hooks/useCountries";
+import { safeUser } from "@/app/types";
+import Heading from "../Heading";
+import HeartButton from "../HeartButton";
+
+interface ListingHeadProps {
+  title: string;
+  locationValue: string;
+  imageSrc: string;
+  id: string;
+  currentUser?: safeUser | null;
+}
+const ListingHead = ({
+  title,
+  locationValue,
+  imageSrc,
+  id,
+  currentUser
+}: ListingHeadProps) => {
+
+  const { getByValue } = useCountries();
+  const location = getByValue(locationValue);
+
+  return ( 
+    <>
+      <Heading
+        title={title}
+        subTitle={`${location?.region}, ${location?.label}`}
+      />
+
+      <div
+        className="
+          w-full
+          h-[80vh]
+          overflow-hidden
+          rounded-xl
+          relative
+        "
+      >
+        <Image
+          alt={title}
+          src={imageSrc}
+          fill
+          className="object-cover w-fill"
+        />
+
+        <div className="absolute top-5 right-5">
+          <HeartButton
+            listingId={id}
+            currentUser={currentUser}
+          />
+        </div>
+      </div>
+    </>
+  );
+}
+ 
+export default ListingHead;
