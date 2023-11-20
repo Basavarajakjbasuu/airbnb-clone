@@ -76,7 +76,7 @@ const ListingClient = ({
       totalPrice,
       startDate: dateRange.startDate,
       endDate: dateRange.endDate,
-      listingId: listing.id
+      listingId: listing?.id
     })
     .then(() => {
       toast.success('Reservation created successfully');
@@ -86,12 +86,14 @@ const ListingClient = ({
     })
     .catch((error) => { 
       toast.error(error.message);
-    });
-    setIsLoading(false);
+    })
+    .finally(() => {
+      setIsLoading(false);
+    })
   },[
     totalPrice,
     dateRange,
-    listing.id,
+    listing?.id,
     currentUser,
     router,
     loginModal
