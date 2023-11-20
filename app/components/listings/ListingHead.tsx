@@ -34,7 +34,8 @@ const ListingHead = ({
       <div
         className="
           w-full
-          h-[80vh]
+          h-[40vh]
+          md:h-[80vh]
           overflow-hidden
           rounded-xl
           relative
