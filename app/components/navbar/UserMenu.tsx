@@ -44,10 +44,11 @@ const UserMenu: React.FC<UserMenuProps> = ({
 
   const onRent = useCallback(() => {
     if (!currentUser) {
-      return loginModal.onOpen();
+      loginModal.onOpen();
+    } else {
+      rentModal.onOpen();
     }
-
-    rentModal.onOpen()
+    setIsOpen(false);
   }, [currentUser, loginModal, rentModal])
 
   
@@ -121,19 +122,31 @@ const UserMenu: React.FC<UserMenuProps> = ({
             {currentUser ? (
               <>
                 <MenuItem
-                  onClick={() => router.push('/trips') }
+                  onClick={() => {
+                    router.push('/trips')
+                    setIsOpen(false)
+                  } }
                   label='My trips'
                 />
                 <MenuItem
-                  onClick={() => router.push('/favorites')}
+                  onClick={() => {
+                    router.push('/favorites')
+                    setIsOpen(false)
+                  }}
                   label='My favorites'
                 />
                 <MenuItem
-                  onClick={ () => router.push('/reservations')}
+                  onClick={ () => {
+                    router.push('/reservations')
+                    setIsOpen(false)
+                  }}
                   label='My reservation'
                 />
                 <MenuItem
-                  onClick={() => router.push('/properties')}
+                  onClick={() => {
+                    router.push('/properties')
+                    setIsOpen(false)
+                  }}
                   label='My properties'
                 />
                 <MenuItem
